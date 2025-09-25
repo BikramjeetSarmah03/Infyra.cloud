@@ -1,0 +1,37 @@
+{
+  "name": "infyra.cloud",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "server/*"
+  ],
+  "scripts": {
+    "check": "biome check --write .",
+    "format": "biome format --write .",
+    "prepare": "husky",
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:www": "turbo -F @apps/www dev",
+    "dev:api": "turbo -F @server/api dev",
+    "dev:dashboard": "turbo run dev --filter=@server/api --filter=@apps/dashboard"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@biomejs/biome": "^2.2.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "turbo": "^2.5.6"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "packageManager": "bun@1.2.20",
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome format --write . && biome check ."
+    ]
+  }
+}
