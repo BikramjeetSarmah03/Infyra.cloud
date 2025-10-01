@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRightIcon } from "lucide-react";
 
 export default function Globe3D() {
   return (
     <section
       className="relative bg-[#0a0613] pt-32 md:pt-20 pb-10 md:pb-16 w-full overflow-hidden font-light text-white antialiased"
       style={{
-        background: "linear-gradient(135deg, #0a0613 0%, #150d27 100%)",
+        background: "linear-gradient(135deg, #220101 0%, #080202 100%)",
       }}
     >
       <div
@@ -32,12 +33,12 @@ export default function Globe3D() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <span className="inline-block mb-6 px-3 py-1 border border-[#9b87f5]/30 rounded-full text-[#9b87f5] text-xs">
+          <span className="inline-block mb-6 px-3 py-1 border border-[#ff2157]/30 rounded-full text-[#ff2157] text-xs">
             NEXT GENERATION OF CLOUD DEPLOYMENT
           </span>
           <h1 className="mx-auto mb-6 max-w-4xl font-light text-4xl md:text-5xl lg:text-7xl">
             Deploy Faster with{" "}
-            <span className="text-[#9b87f5]">Multi-Cloud Freedom</span>
+            <span className="text-[#ff2157]">Multi-Cloud Freedom</span>
           </h1>
           <p className="mx-auto mb-10 max-w-2xl text-white/60 text-lg md:text-xl">
             Infyra.cloud brings simplicity to AWS, GCP, and beyond — manage
@@ -50,30 +51,14 @@ export default function Globe3D() {
             <Link
               prefetch={false}
               href="/docs/get-started"
-              className="relative bg-gradient-to-b from-white/10 to-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(155, px-8 py-4 border border-white/10 hover:border-[#9b87f5]/30 rounded-full w-full sm:w-auto overflow-hidden text-white transition-all duration-300 neumorphic-button 135, 245, 0.5)]"
+              className="relative bg-gradient-to-b group from-primary/10 to-primary/5 shadow-lg hover:shadow-[0_0_20px_rgba(155, px-8 py-4 border border-white/10 hover:border-[#ff2157]/30 rounded-full w-full sm:w-auto overflow-hidden text-white transition-all duration-300 neumorphic-button 135, 245, 0.5)] flex items-center gap-2"
             >
               Get Started Free
+              <ArrowRightIcon
+                size={18}
+                className="group-hover:ml-2 transition-all duration-300"
+              />
             </Link>
-            <a
-              href="#how-it-works"
-              className="flex justify-center items-center gap-2 w-full sm:w-auto text-white/70 hover:text-white transition-colors"
-            >
-              <span>Learn how it works</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <title>""</title>
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </a>
           </div>
         </motion.div>
         <motion.div

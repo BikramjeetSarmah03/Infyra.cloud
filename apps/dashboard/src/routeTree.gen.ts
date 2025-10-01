@@ -15,7 +15,6 @@ import { Route as protectedIndexRouteImport } from './pages/(protected)/index'
 import { Route as AuthRegisterRouteImport } from './pages/auth/register'
 import { Route as AuthLoginRouteImport } from './pages/auth/login'
 import { Route as protectedProjectLayoutRouteImport } from './pages/(protected)/$project/_layout'
-import { Route as protectedDeploymentsIndexRouteImport } from './pages/(protected)/deployments/index'
 import { Route as protectedProjectIndexRouteImport } from './pages/(protected)/$project/index'
 import { Route as AuthPasswordForgotRouteImport } from './pages/auth/password/forgot'
 import { Route as protectedProjectSettingsRouteImport } from './pages/(protected)/$project/settings'
@@ -52,12 +51,6 @@ const protectedProjectLayoutRoute = protectedProjectLayoutRouteImport.update({
   path: '/$project',
   getParentRoute: () => protectedLayoutRoute,
 } as any)
-const protectedDeploymentsIndexRoute =
-  protectedDeploymentsIndexRouteImport.update({
-    id: '/deployments/',
-    path: '/deployments/',
-    getParentRoute: () => protectedLayoutRoute,
-  } as any)
 const protectedProjectIndexRoute = protectedProjectIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -104,7 +97,6 @@ export interface FileRoutesByFullPath {
   '/$project/settings': typeof protectedProjectSettingsRoute
   '/auth/password/forgot': typeof AuthPasswordForgotRoute
   '/$project/': typeof protectedProjectIndexRoute
-  '/deployments': typeof protectedDeploymentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthLayoutRouteWithChildren
@@ -117,7 +109,6 @@ export interface FileRoutesByTo {
   '/$project/settings': typeof protectedProjectSettingsRoute
   '/auth/password/forgot': typeof AuthPasswordForgotRoute
   '/$project': typeof protectedProjectIndexRoute
-  '/deployments': typeof protectedDeploymentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -133,7 +124,6 @@ export interface FileRoutesById {
   '/(protected)/$project/settings': typeof protectedProjectSettingsRoute
   '/auth/password/forgot': typeof AuthPasswordForgotRoute
   '/(protected)/$project/': typeof protectedProjectIndexRoute
-  '/(protected)/deployments/': typeof protectedDeploymentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -149,7 +139,6 @@ export interface FileRouteTypes {
     | '/$project/settings'
     | '/auth/password/forgot'
     | '/$project/'
-    | '/deployments'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -162,7 +151,6 @@ export interface FileRouteTypes {
     | '/$project/settings'
     | '/auth/password/forgot'
     | '/$project'
-    | '/deployments'
   id:
     | '__root__'
     | '/(protected)'
@@ -177,7 +165,6 @@ export interface FileRouteTypes {
     | '/(protected)/$project/settings'
     | '/auth/password/forgot'
     | '/(protected)/$project/'
-    | '/(protected)/deployments/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -227,13 +214,6 @@ declare module '@tanstack/react-router' {
       path: '/$project'
       fullPath: '/$project'
       preLoaderRoute: typeof protectedProjectLayoutRouteImport
-      parentRoute: typeof protectedLayoutRoute
-    }
-    '/(protected)/deployments/': {
-      id: '/(protected)/deployments/'
-      path: '/deployments'
-      fullPath: '/deployments'
-      preLoaderRoute: typeof protectedDeploymentsIndexRouteImport
       parentRoute: typeof protectedLayoutRoute
     }
     '/(protected)/$project/': {
@@ -306,13 +286,11 @@ const protectedProjectLayoutRouteWithChildren =
 interface protectedLayoutRouteChildren {
   protectedProjectLayoutRoute: typeof protectedProjectLayoutRouteWithChildren
   protectedIndexRoute: typeof protectedIndexRoute
-  protectedDeploymentsIndexRoute: typeof protectedDeploymentsIndexRoute
 }
 
 const protectedLayoutRouteChildren: protectedLayoutRouteChildren = {
   protectedProjectLayoutRoute: protectedProjectLayoutRouteWithChildren,
   protectedIndexRoute: protectedIndexRoute,
-  protectedDeploymentsIndexRoute: protectedDeploymentsIndexRoute,
 }
 
 const protectedLayoutRouteWithChildren = protectedLayoutRoute._addFileChildren(

@@ -82,7 +82,7 @@ const contactInfo = [
 
 export default function Footer4Col() {
   return (
-    <footer className="place-self-end bg-secondary dark:bg-secondary/20 mt-16 rounded-t-xl w-full">
+    <footer className="place-self-end bg-secondary dark:bg-secondary/20 rounded-t-xl w-full">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24 pb-6 max-w-screen-xl">
         <div className="gap-8 grid grid-cols-1 lg:grid-cols-3">
           <div>

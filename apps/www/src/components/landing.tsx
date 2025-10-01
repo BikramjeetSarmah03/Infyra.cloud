@@ -1,5 +1,7 @@
 import FeaturesSectionDemo from "./features-section-demo-3";
 import Globe3D from "./mvpblocks/3dglobe";
+import CongestedPricing from "./mvpblocks/congested-pricing";
+import CircularFeaturesSection from "./mvpblocks/features";
 import Footer4Col from "./mvpblocks/footer-4col";
 
 export default function LandingPage() {
@@ -7,7 +9,17 @@ export default function LandingPage() {
     <>
       <Globe3D />
 
-      <FeaturesSectionDemo />
+      <div className="bg-[#130101]">
+        <FeaturesSectionDemo />
+      </div>
+
+      <div className="bg-[#130101] pb-16">
+        <CircularFeaturesSection />
+      </div>
+
+      <div className="bg-[#130101] pb-16">
+        <CongestedPricing />
+      </div>
 
       <Footer4Col />
     </>
