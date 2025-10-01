@@ -1,9 +1,8 @@
 import type { LinkProps } from "@tanstack/react-router";
 import {
-  ComputerIcon,
-  DatabaseIcon,
-  FoldersIcon,
   LayoutDashboardIcon,
+  FolderKanbanIcon,
+  AppWindowIcon,
   type LucideIcon,
 } from "lucide-react";
 
@@ -20,35 +19,29 @@ export const MainNavItems: NavItem[] = [
     url: "/",
     icon: LayoutDashboardIcon,
   },
+  {
+    title: "Projects",
+    url: "/projects",
+    icon: FolderKanbanIcon,
+  },
+  {
+    title: "Applications",
+    url: "/applications",
+    icon: AppWindowIcon,
+  },
   // {
-  //   title: "Deployments",
-  //   url: "/deployments",
-  //   icon: CloudUploadIcon,
+  //   title: "Databases",
+  //   url: "/database",
+  //   icon: DatabaseIcon,
   // },
-
   // {
-  //   title: "Anaytics",
+  //   title: "Storage",
+  //   url: "/storage",
+  //   icon: HardDriveIcon,
+  // },
+  // {
+  //   title: "Analytics",
   //   url: "/analytics",
-  //   icon: TrendingUpIcon,
-  // },
-  {
-    title: "VM",
-    url: "/vm",
-    icon: ComputerIcon,
-  },
-  {
-    title: "Storage",
-    url: "/storage",
-    icon: FoldersIcon,
-  },
-  {
-    title: "Database",
-    url: "/database",
-    icon: DatabaseIcon,
-  },
-  // {
-  //   title: "Domains",
-  //   url: "/domains",
-  //   icon: GlobeIcon,
+  //   icon: BarChart3Icon,
   // },
 ];

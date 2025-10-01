@@ -1,4 +1,4 @@
-import { Command, LifeBuoy, Send, Settings2 } from "lucide-react";
+import { Command, LifeBuoy, Send, Settings2, UsersIcon } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
@@ -23,6 +23,11 @@ const data = {
   },
 
   navSecondary: [
+    {
+      title: "Team",
+      url: "/team",
+      icon: UsersIcon,
+    },
     {
       title: "Settings",
       url: "#",

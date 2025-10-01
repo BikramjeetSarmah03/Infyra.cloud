@@ -1,4 +1,3 @@
-import ProjectCard from "@/components/features/project/project-card";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/(protected)/")({
@@ -8,10 +7,19 @@ export const Route = createFileRoute("/(protected)/")({
 function App() {
   return (
     <div className="flex flex-col flex-1 gap-4 p-4">
-      <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <ProjectCard key={i.toString()} />
-        ))}
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-2 h-full">
+        <div className="space-y-6 bg-muted p-4 border hover:border-primary/50 rounded-md text-sm transition-all duration-300">
+          Hey
+        </div>
+        <div className="space-y-6 bg-muted p-4 border hover:border-primary/50 rounded-md text-sm transition-all duration-300">
+          Hey
+        </div>
+        <div className="space-y-6 bg-muted p-4 border hover:border-primary/50 rounded-md text-sm transition-all duration-300">
+          Hey
+        </div>
+        <div className="space-y-6 bg-muted p-4 border hover:border-primary/50 rounded-md text-sm transition-all duration-300">
+          Hey
+        </div>
       </div>
     </div>
   );

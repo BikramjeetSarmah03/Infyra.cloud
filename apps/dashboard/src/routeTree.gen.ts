@@ -14,13 +14,15 @@ import { Route as protectedLayoutRouteImport } from './pages/(protected)/_layout
 import { Route as protectedIndexRouteImport } from './pages/(protected)/index'
 import { Route as AuthRegisterRouteImport } from './pages/auth/register'
 import { Route as AuthLoginRouteImport } from './pages/auth/login'
-import { Route as protectedProjectLayoutRouteImport } from './pages/(protected)/$project/_layout'
-import { Route as protectedProjectIndexRouteImport } from './pages/(protected)/$project/index'
+import { Route as protectedProjectsIndexRouteImport } from './pages/(protected)/projects/index'
+import { Route as protectedApplicationsIndexRouteImport } from './pages/(protected)/applications/index'
 import { Route as AuthPasswordForgotRouteImport } from './pages/auth/password/forgot'
-import { Route as protectedProjectSettingsRouteImport } from './pages/(protected)/$project/settings'
-import { Route as protectedProjectLogsRouteImport } from './pages/(protected)/$project/logs'
-import { Route as protectedProjectDeploymentsRouteImport } from './pages/(protected)/$project/deployments'
-import { Route as protectedProjectAnalyticsRouteImport } from './pages/(protected)/$project/analytics'
+import { Route as protectedProjectsProjectLayoutRouteImport } from './pages/(protected)/projects/$project/_layout'
+import { Route as protectedProjectsProjectIndexRouteImport } from './pages/(protected)/projects/$project/index'
+import { Route as protectedProjectsProjectSettingsRouteImport } from './pages/(protected)/projects/$project/settings'
+import { Route as protectedProjectsProjectLogsRouteImport } from './pages/(protected)/projects/$project/logs'
+import { Route as protectedProjectsProjectDeploymentsRouteImport } from './pages/(protected)/projects/$project/deployments'
+import { Route as protectedProjectsProjectAnalyticsRouteImport } from './pages/(protected)/projects/$project/analytics'
 
 const AuthLayoutRoute = AuthLayoutRouteImport.update({
   id: '/auth',
@@ -46,125 +48,151 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthLayoutRoute,
 } as any)
-const protectedProjectLayoutRoute = protectedProjectLayoutRouteImport.update({
-  id: '/$project',
-  path: '/$project',
+const protectedProjectsIndexRoute = protectedProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
   getParentRoute: () => protectedLayoutRoute,
 } as any)
-const protectedProjectIndexRoute = protectedProjectIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => protectedProjectLayoutRoute,
-} as any)
+const protectedApplicationsIndexRoute =
+  protectedApplicationsIndexRouteImport.update({
+    id: '/applications/',
+    path: '/applications/',
+    getParentRoute: () => protectedLayoutRoute,
+  } as any)
 const AuthPasswordForgotRoute = AuthPasswordForgotRouteImport.update({
   id: '/password/forgot',
   path: '/password/forgot',
   getParentRoute: () => AuthLayoutRoute,
 } as any)
-const protectedProjectSettingsRoute =
-  protectedProjectSettingsRouteImport.update({
+const protectedProjectsProjectLayoutRoute =
+  protectedProjectsProjectLayoutRouteImport.update({
+    id: '/projects/$project',
+    path: '/projects/$project',
+    getParentRoute: () => protectedLayoutRoute,
+  } as any)
+const protectedProjectsProjectIndexRoute =
+  protectedProjectsProjectIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => protectedProjectsProjectLayoutRoute,
+  } as any)
+const protectedProjectsProjectSettingsRoute =
+  protectedProjectsProjectSettingsRouteImport.update({
     id: '/settings',
     path: '/settings',
-    getParentRoute: () => protectedProjectLayoutRoute,
+    getParentRoute: () => protectedProjectsProjectLayoutRoute,
   } as any)
-const protectedProjectLogsRoute = protectedProjectLogsRouteImport.update({
-  id: '/logs',
-  path: '/logs',
-  getParentRoute: () => protectedProjectLayoutRoute,
-} as any)
-const protectedProjectDeploymentsRoute =
-  protectedProjectDeploymentsRouteImport.update({
+const protectedProjectsProjectLogsRoute =
+  protectedProjectsProjectLogsRouteImport.update({
+    id: '/logs',
+    path: '/logs',
+    getParentRoute: () => protectedProjectsProjectLayoutRoute,
+  } as any)
+const protectedProjectsProjectDeploymentsRoute =
+  protectedProjectsProjectDeploymentsRouteImport.update({
     id: '/deployments',
     path: '/deployments',
-    getParentRoute: () => protectedProjectLayoutRoute,
+    getParentRoute: () => protectedProjectsProjectLayoutRoute,
   } as any)
-const protectedProjectAnalyticsRoute =
-  protectedProjectAnalyticsRouteImport.update({
+const protectedProjectsProjectAnalyticsRoute =
+  protectedProjectsProjectAnalyticsRouteImport.update({
     id: '/analytics',
     path: '/analytics',
-    getParentRoute: () => protectedProjectLayoutRoute,
+    getParentRoute: () => protectedProjectsProjectLayoutRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof protectedIndexRoute
   '/auth': typeof AuthLayoutRouteWithChildren
-  '/$project': typeof protectedProjectLayoutRouteWithChildren
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
-  '/$project/analytics': typeof protectedProjectAnalyticsRoute
-  '/$project/deployments': typeof protectedProjectDeploymentsRoute
-  '/$project/logs': typeof protectedProjectLogsRoute
-  '/$project/settings': typeof protectedProjectSettingsRoute
+  '/projects/$project': typeof protectedProjectsProjectLayoutRouteWithChildren
   '/auth/password/forgot': typeof AuthPasswordForgotRoute
-  '/$project/': typeof protectedProjectIndexRoute
+  '/applications': typeof protectedApplicationsIndexRoute
+  '/projects': typeof protectedProjectsIndexRoute
+  '/projects/$project/analytics': typeof protectedProjectsProjectAnalyticsRoute
+  '/projects/$project/deployments': typeof protectedProjectsProjectDeploymentsRoute
+  '/projects/$project/logs': typeof protectedProjectsProjectLogsRoute
+  '/projects/$project/settings': typeof protectedProjectsProjectSettingsRoute
+  '/projects/$project/': typeof protectedProjectsProjectIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthLayoutRouteWithChildren
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/': typeof protectedIndexRoute
-  '/$project/analytics': typeof protectedProjectAnalyticsRoute
-  '/$project/deployments': typeof protectedProjectDeploymentsRoute
-  '/$project/logs': typeof protectedProjectLogsRoute
-  '/$project/settings': typeof protectedProjectSettingsRoute
   '/auth/password/forgot': typeof AuthPasswordForgotRoute
-  '/$project': typeof protectedProjectIndexRoute
+  '/applications': typeof protectedApplicationsIndexRoute
+  '/projects': typeof protectedProjectsIndexRoute
+  '/projects/$project/analytics': typeof protectedProjectsProjectAnalyticsRoute
+  '/projects/$project/deployments': typeof protectedProjectsProjectDeploymentsRoute
+  '/projects/$project/logs': typeof protectedProjectsProjectLogsRoute
+  '/projects/$project/settings': typeof protectedProjectsProjectSettingsRoute
+  '/projects/$project': typeof protectedProjectsProjectIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(protected)': typeof protectedLayoutRouteWithChildren
   '/auth': typeof AuthLayoutRouteWithChildren
-  '/(protected)/$project': typeof protectedProjectLayoutRouteWithChildren
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/(protected)/': typeof protectedIndexRoute
-  '/(protected)/$project/analytics': typeof protectedProjectAnalyticsRoute
-  '/(protected)/$project/deployments': typeof protectedProjectDeploymentsRoute
-  '/(protected)/$project/logs': typeof protectedProjectLogsRoute
-  '/(protected)/$project/settings': typeof protectedProjectSettingsRoute
+  '/(protected)/projects/$project': typeof protectedProjectsProjectLayoutRouteWithChildren
   '/auth/password/forgot': typeof AuthPasswordForgotRoute
-  '/(protected)/$project/': typeof protectedProjectIndexRoute
+  '/(protected)/applications/': typeof protectedApplicationsIndexRoute
+  '/(protected)/projects/': typeof protectedProjectsIndexRoute
+  '/(protected)/projects/$project/analytics': typeof protectedProjectsProjectAnalyticsRoute
+  '/(protected)/projects/$project/deployments': typeof protectedProjectsProjectDeploymentsRoute
+  '/(protected)/projects/$project/logs': typeof protectedProjectsProjectLogsRoute
+  '/(protected)/projects/$project/settings': typeof protectedProjectsProjectSettingsRoute
+  '/(protected)/projects/$project/': typeof protectedProjectsProjectIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/auth'
-    | '/$project'
     | '/auth/login'
     | '/auth/register'
-    | '/$project/analytics'
-    | '/$project/deployments'
-    | '/$project/logs'
-    | '/$project/settings'
+    | '/projects/$project'
     | '/auth/password/forgot'
-    | '/$project/'
+    | '/applications'
+    | '/projects'
+    | '/projects/$project/analytics'
+    | '/projects/$project/deployments'
+    | '/projects/$project/logs'
+    | '/projects/$project/settings'
+    | '/projects/$project/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
     | '/auth/login'
     | '/auth/register'
     | '/'
-    | '/$project/analytics'
-    | '/$project/deployments'
-    | '/$project/logs'
-    | '/$project/settings'
     | '/auth/password/forgot'
-    | '/$project'
+    | '/applications'
+    | '/projects'
+    | '/projects/$project/analytics'
+    | '/projects/$project/deployments'
+    | '/projects/$project/logs'
+    | '/projects/$project/settings'
+    | '/projects/$project'
   id:
     | '__root__'
     | '/(protected)'
     | '/auth'
-    | '/(protected)/$project'
     | '/auth/login'
     | '/auth/register'
     | '/(protected)/'
-    | '/(protected)/$project/analytics'
-    | '/(protected)/$project/deployments'
-    | '/(protected)/$project/logs'
-    | '/(protected)/$project/settings'
+    | '/(protected)/projects/$project'
     | '/auth/password/forgot'
-    | '/(protected)/$project/'
+    | '/(protected)/applications/'
+    | '/(protected)/projects/'
+    | '/(protected)/projects/$project/analytics'
+    | '/(protected)/projects/$project/deployments'
+    | '/(protected)/projects/$project/logs'
+    | '/(protected)/projects/$project/settings'
+    | '/(protected)/projects/$project/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -209,19 +237,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthLayoutRoute
     }
-    '/(protected)/$project': {
-      id: '/(protected)/$project'
-      path: '/$project'
-      fullPath: '/$project'
-      preLoaderRoute: typeof protectedProjectLayoutRouteImport
+    '/(protected)/projects/': {
+      id: '/(protected)/projects/'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof protectedProjectsIndexRouteImport
       parentRoute: typeof protectedLayoutRoute
     }
-    '/(protected)/$project/': {
-      id: '/(protected)/$project/'
-      path: '/'
-      fullPath: '/$project/'
-      preLoaderRoute: typeof protectedProjectIndexRouteImport
-      parentRoute: typeof protectedProjectLayoutRoute
+    '/(protected)/applications/': {
+      id: '/(protected)/applications/'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof protectedApplicationsIndexRouteImport
+      parentRoute: typeof protectedLayoutRoute
     }
     '/auth/password/forgot': {
       id: '/auth/password/forgot'
@@ -230,67 +258,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthPasswordForgotRouteImport
       parentRoute: typeof AuthLayoutRoute
     }
-    '/(protected)/$project/settings': {
-      id: '/(protected)/$project/settings'
+    '/(protected)/projects/$project': {
+      id: '/(protected)/projects/$project'
+      path: '/projects/$project'
+      fullPath: '/projects/$project'
+      preLoaderRoute: typeof protectedProjectsProjectLayoutRouteImport
+      parentRoute: typeof protectedLayoutRoute
+    }
+    '/(protected)/projects/$project/': {
+      id: '/(protected)/projects/$project/'
+      path: '/'
+      fullPath: '/projects/$project/'
+      preLoaderRoute: typeof protectedProjectsProjectIndexRouteImport
+      parentRoute: typeof protectedProjectsProjectLayoutRoute
+    }
+    '/(protected)/projects/$project/settings': {
+      id: '/(protected)/projects/$project/settings'
       path: '/settings'
-      fullPath: '/$project/settings'
-      preLoaderRoute: typeof protectedProjectSettingsRouteImport
-      parentRoute: typeof protectedProjectLayoutRoute
+      fullPath: '/projects/$project/settings'
+      preLoaderRoute: typeof protectedProjectsProjectSettingsRouteImport
+      parentRoute: typeof protectedProjectsProjectLayoutRoute
     }
-    '/(protected)/$project/logs': {
-      id: '/(protected)/$project/logs'
+    '/(protected)/projects/$project/logs': {
+      id: '/(protected)/projects/$project/logs'
       path: '/logs'
-      fullPath: '/$project/logs'
-      preLoaderRoute: typeof protectedProjectLogsRouteImport
-      parentRoute: typeof protectedProjectLayoutRoute
+      fullPath: '/projects/$project/logs'
+      preLoaderRoute: typeof protectedProjectsProjectLogsRouteImport
+      parentRoute: typeof protectedProjectsProjectLayoutRoute
     }
-    '/(protected)/$project/deployments': {
-      id: '/(protected)/$project/deployments'
+    '/(protected)/projects/$project/deployments': {
+      id: '/(protected)/projects/$project/deployments'
       path: '/deployments'
-      fullPath: '/$project/deployments'
-      preLoaderRoute: typeof protectedProjectDeploymentsRouteImport
-      parentRoute: typeof protectedProjectLayoutRoute
+      fullPath: '/projects/$project/deployments'
+      preLoaderRoute: typeof protectedProjectsProjectDeploymentsRouteImport
+      parentRoute: typeof protectedProjectsProjectLayoutRoute
     }
-    '/(protected)/$project/analytics': {
-      id: '/(protected)/$project/analytics'
+    '/(protected)/projects/$project/analytics': {
+      id: '/(protected)/projects/$project/analytics'
       path: '/analytics'
-      fullPath: '/$project/analytics'
-      preLoaderRoute: typeof protectedProjectAnalyticsRouteImport
-      parentRoute: typeof protectedProjectLayoutRoute
+      fullPath: '/projects/$project/analytics'
+      preLoaderRoute: typeof protectedProjectsProjectAnalyticsRouteImport
+      parentRoute: typeof protectedProjectsProjectLayoutRoute
     }
   }
 }
 
-interface protectedProjectLayoutRouteChildren {
-  protectedProjectAnalyticsRoute: typeof protectedProjectAnalyticsRoute
-  protectedProjectDeploymentsRoute: typeof protectedProjectDeploymentsRoute
-  protectedProjectLogsRoute: typeof protectedProjectLogsRoute
-  protectedProjectSettingsRoute: typeof protectedProjectSettingsRoute
-  protectedProjectIndexRoute: typeof protectedProjectIndexRoute
+interface protectedProjectsProjectLayoutRouteChildren {
+  protectedProjectsProjectAnalyticsRoute: typeof protectedProjectsProjectAnalyticsRoute
+  protectedProjectsProjectDeploymentsRoute: typeof protectedProjectsProjectDeploymentsRoute
+  protectedProjectsProjectLogsRoute: typeof protectedProjectsProjectLogsRoute
+  protectedProjectsProjectSettingsRoute: typeof protectedProjectsProjectSettingsRoute
+  protectedProjectsProjectIndexRoute: typeof protectedProjectsProjectIndexRoute
 }
 
-const protectedProjectLayoutRouteChildren: protectedProjectLayoutRouteChildren =
+const protectedProjectsProjectLayoutRouteChildren: protectedProjectsProjectLayoutRouteChildren =
   {
-    protectedProjectAnalyticsRoute: protectedProjectAnalyticsRoute,
-    protectedProjectDeploymentsRoute: protectedProjectDeploymentsRoute,
-    protectedProjectLogsRoute: protectedProjectLogsRoute,
-    protectedProjectSettingsRoute: protectedProjectSettingsRoute,
-    protectedProjectIndexRoute: protectedProjectIndexRoute,
+    protectedProjectsProjectAnalyticsRoute:
+      protectedProjectsProjectAnalyticsRoute,
+    protectedProjectsProjectDeploymentsRoute:
+      protectedProjectsProjectDeploymentsRoute,
+    protectedProjectsProjectLogsRoute: protectedProjectsProjectLogsRoute,
+    protectedProjectsProjectSettingsRoute:
+      protectedProjectsProjectSettingsRoute,
+    protectedProjectsProjectIndexRoute: protectedProjectsProjectIndexRoute,
   }
 
-const protectedProjectLayoutRouteWithChildren =
-  protectedProjectLayoutRoute._addFileChildren(
-    protectedProjectLayoutRouteChildren,
+const protectedProjectsProjectLayoutRouteWithChildren =
+  protectedProjectsProjectLayoutRoute._addFileChildren(
+    protectedProjectsProjectLayoutRouteChildren,
   )
 
 interface protectedLayoutRouteChildren {
-  protectedProjectLayoutRoute: typeof protectedProjectLayoutRouteWithChildren
   protectedIndexRoute: typeof protectedIndexRoute
+  protectedProjectsProjectLayoutRoute: typeof protectedProjectsProjectLayoutRouteWithChildren
+  protectedApplicationsIndexRoute: typeof protectedApplicationsIndexRoute
+  protectedProjectsIndexRoute: typeof protectedProjectsIndexRoute
 }
 
 const protectedLayoutRouteChildren: protectedLayoutRouteChildren = {
-  protectedProjectLayoutRoute: protectedProjectLayoutRouteWithChildren,
   protectedIndexRoute: protectedIndexRoute,
+  protectedProjectsProjectLayoutRoute:
+    protectedProjectsProjectLayoutRouteWithChildren,
+  protectedApplicationsIndexRoute: protectedApplicationsIndexRoute,
+  protectedProjectsIndexRoute: protectedProjectsIndexRoute,
 }
 
 const protectedLayoutRouteWithChildren = protectedLayoutRoute._addFileChildren(

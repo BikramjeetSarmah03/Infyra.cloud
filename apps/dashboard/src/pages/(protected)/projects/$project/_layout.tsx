@@ -12,7 +12,7 @@ interface IProjectNavItem {
   params: LinkProps["params"];
 }
 
-export const Route = createFileRoute("/(protected)/$project")({
+export const Route = createFileRoute("/(protected)/projects/$project")({
   component: RouteComponent,
 });
 
