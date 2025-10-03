@@ -1,8 +1,10 @@
 version: "3.8"
+
 services:
   postgres:
-    image: postgres
-    container_name: infyra
+    image: postgres:latest
+    container_name: infyra-db
+    restart: always
     environment:
       POSTGRES_USER: infyra
       POSTGRES_PASSWORD: root
@@ -10,12 +12,18 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - ./tmp/infyra:/var/lib/postgresql/data
+      - infyra-db-data:/var/lib/postgresql/data   # named volume
+
   redis:
     image: redis:7-alpine
     container_name: infyra-redis
+    restart: always
     ports:
       - "6379:6379"
     volumes:
-      - ./tmp/redis:/data
+      - infyra-redis-data:/data
     command: ["redis-server", "--appendonly", "yes"]
+
+volumes:
+  infyra-db-data:
+  infyra-redis-data:

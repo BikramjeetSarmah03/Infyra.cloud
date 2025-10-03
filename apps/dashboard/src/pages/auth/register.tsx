@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { LoadingButton } from "@/components/ui/loading-button";
-import { SocialButtons } from "@/components/auth/social-button";
+import { SocialButtons } from "@/components/features/auth/social-button";
 import { PasswordInput } from "@/components/ui/password-input";
 
 const fallback = "/";

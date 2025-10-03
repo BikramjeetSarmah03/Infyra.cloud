@@ -22,27 +22,27 @@ function RouteComponent() {
   const ProjectNavItems: IProjectNavItem[] = [
     {
       title: "Overview",
-      url: "/$project",
+      url: "/projects/$project",
       params,
     },
     {
       title: "Deployments",
-      url: "/$project/deployments",
+      url: "/projects/$project/deployments",
       params,
     },
     {
       title: "Analytics",
-      url: "/$project/analytics",
+      url: "/projects/$project/analytics",
       params,
     },
     {
       title: "Logs",
-      url: "/$project/logs",
+      url: "/projects/$project/logs",
       params,
     },
     {
       title: "Settings",
-      url: "/$project/settings",
+      url: "/projects/$project/settings",
       params,
     },
   ];
