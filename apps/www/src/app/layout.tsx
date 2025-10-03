@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "Infyra.cloud",
     images: [
       {
-        url: "/og-image.png", // replace with your hosted OG image
+        url: "/opengraph-image.png", // replace with your hosted OG image
         width: 1200,
         height: 630,
         alt: "Infyra.cloud Dashboard Preview",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Infyra.cloud – Multi-Cloud Deployments Made Simple",
     description:
       "India-first multi-cloud platform for developers and enterprises. One-click deployments, managed services, and simple pricing.",
-    images: ["/og-image.png"], // same as OG
+    images: ["/opengraph-image.png"], // same as OG
     creator: "@_bikramjeet", // replace if you have one
   },
   icons: {
