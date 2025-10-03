@@ -40,14 +40,14 @@ export const metadata: Metadata = {
       "Deploy apps across AWS, GCP, Azure, and Oracle from one dashboard. Developer-first, India-priced, enterprise-ready.",
     url: "https://infyra.cloud",
     siteName: "Infyra.cloud",
-    images: [
-      {
-        url: "/opengraph-image.png", // replace with your hosted OG image
-        width: 1200,
-        height: 630,
-        alt: "Infyra.cloud Dashboard Preview",
-      },
-    ],
+    // images: [
+    //   {
+    //     url: "/opengraph-image.png", // replace with your hosted OG image
+    //     width: 1200,
+    //     height: 630,
+    //     alt: "Infyra.cloud Dashboard Preview",
+    //   },
+    // ],
     locale: "en_IN",
     type: "website",
   },
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Infyra.cloud – Multi-Cloud Deployments Made Simple",
     description:
       "India-first multi-cloud platform for developers and enterprises. One-click deployments, managed services, and simple pricing.",
-    images: ["/opengraph-image.png"], // same as OG
+    // images: ["/opengraph-image.png"], // same as OG
     creator: "@_bikramjeet", // replace if you have one
   },
   icons: {
