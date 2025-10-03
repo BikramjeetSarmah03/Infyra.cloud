@@ -51,10 +51,10 @@ export default function Globe3D() {
           <div className="flex sm:flex-row flex-col justify-center items-center gap-4 mb-10 sm:mb-0">
             <Link
               prefetch={false}
-              href="/docs/get-started"
+              href="/"
               className="relative bg-gradient-to-b group from-primary/10 to-primary/5 shadow-lg hover:shadow-[0_0_20px_rgba(155, px-8 py-4 border border-white/10 hover:border-[#ff2157]/30 rounded-full w-full sm:w-auto overflow-hidden text-white transition-all duration-300 neumorphic-button 135, 245, 0.5)] flex items-center gap-2"
             >
-              Get Started Free
+              Join Waitlist
               <ArrowRightIcon
                 size={18}
                 className="group-hover:ml-2 transition-all duration-300"
