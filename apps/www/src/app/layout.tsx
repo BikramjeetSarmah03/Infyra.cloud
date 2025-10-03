@@ -56,8 +56,8 @@ export const metadata: Metadata = {
     title: "Infyra.cloud – Multi-Cloud Deployments Made Simple",
     description:
       "India-first multi-cloud platform for developers and enterprises. One-click deployments, managed services, and simple pricing.",
-    images: ["/og-image.png"], // same as OG
-    creator: "@yourtwitterhandle", // replace if you have one
+    images: ["/og-image.jpeg"], // same as OG
+    creator: "@_bikramjeet", // replace if you have one
   },
   icons: {
     icon: "/favicon.ico",

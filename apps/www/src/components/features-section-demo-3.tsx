@@ -3,8 +3,6 @@
 import { cn } from "@/lib/utils";
 import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
-import { motion } from "motion/react";
-import { IconBrandYoutubeFilled } from "@tabler/icons-react";
 
 export default function FeaturesSectionDemo() {
   const features = [
@@ -17,18 +15,19 @@ export default function FeaturesSectionDemo() {
         "col-span-1 lg:col-span-4 border-b lg:border-r dark:border-neutral-800",
     },
     {
-      title: "Built for developers, not billing",
+      title: "Instant GitHub Integration",
       description:
-        "Generous free tier, predictable pricing, and zero hidden costs. Focus on building — not calculating cloud bills.",
+        "Connect your repo, push code, and watch it go live. No configs, no headaches — just smooth workflows.",
       skeleton: <SkeletonTwo />,
       className: "border-b col-span-1 lg:col-span-2 dark:border-neutral-800",
     },
     {
-      title: "Instant GitHub Integration",
+      title: "Built for developers, not billing",
       description:
-        "Connect your repo, push code, and watch it go live. No configs, no headaches — just smooth workflows.",
+        "Generous free tier, predictable pricing, and zero hidden costs. Focus on building — not calculating cloud bills.",
       skeleton: <SkeletonThree />,
-      className: "col-span-1 lg:col-span-3 lg:border-r dark:border-neutral-800",
+      className:
+        "col-span-1 border-b md:border-b-0 lg:col-span-3 lg:border-r dark:border-neutral-800",
     },
     {
       title: "Edge-powered performance",
@@ -95,7 +94,7 @@ const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
       className={cn(
         "mx-auto max-w-4xl text-sm md:text-base text-left",
         "text-neutral-500 text-center font-normal dark:text-neutral-300",
-        "text-left max-w-sm mx-0 md:text-sm my-2",
+        "text-left max-w-sm mx-0 md:text-sm my-2"
       )}
     >
       {children}
@@ -107,14 +106,12 @@ export const SkeletonOne = () => {
   return (
     <div className="relative flex gap-10 px-2 py-8 h-full">
       <div className="group bg-white dark:bg-neutral-900 shadow-2xl mx-auto p-5 w-full h-full">
-        <div className="flex flex-col flex-1 space-y-2 w-full h-full">
+        <div className="flex flex-col flex-1 space-y-2 w-full h-20">
           {/* TODO */}
           <img
-            src="/linear.webp"
+            src="/assets/deploy.png"
             alt="header"
-            width={800}
-            height={800}
-            className="rounded-sm w-full h-full object-cover object-left-top aspect-square"
+            className="rounded-sm w-full h-full object-cover"
           />
         </div>
       </div>
@@ -125,7 +122,7 @@ export const SkeletonOne = () => {
   );
 };
 
-export const SkeletonThree = () => {
+export const SkeletonTwo = () => {
   return (
     <a
       href="https://www.youtube.com/watch?v=RPa3_AD1_Vs"
@@ -133,15 +130,13 @@ export const SkeletonThree = () => {
       className="group/image relative flex gap-10 h-full"
     >
       <div className="group bg-transparent dark:bg-transparent mx-auto w-full h-full">
-        <div className="relative flex flex-col flex-1 space-y-2 w-full h-full">
-          {/* TODO */}
-          <IconBrandYoutubeFilled className="z-10 absolute inset-0 m-auto w-20 h-20 text-red-500" />
+        <div className="relative flex flex-col flex-1 space-y-2 w-full h-40">
           <img
-            src="https://assets.aceternity.com/fireship.jpg"
+            src="/assets/github.jpeg"
             alt="header"
             width={800}
             height={800}
-            className="blur-none group-hover/image:blur-md rounded-sm w-full h-full object-center object-cover aspect-square transition-all duration-200"
+            className="rounded-sm w-full h-full object-center object-cover aspect-square transition-all duration-200"
           />
         </div>
       </div>
@@ -149,73 +144,17 @@ export const SkeletonThree = () => {
   );
 };
 
-export const SkeletonTwo = () => {
-  const images = [
-    "https://images.unsplash.com/photo-1517322048670-4fba75cbbb62?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1573790387438-4da905039392?q=80&w=3425&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1554931670-4ebfabf6e7a9?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2581&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ];
-
-  const imageVariants = {
-    whileHover: {
-      scale: 1.1,
-      rotate: 0,
-      zIndex: 100,
-    },
-    whileTap: {
-      scale: 1.1,
-      rotate: 0,
-      zIndex: 100,
-    },
-  };
+export const SkeletonThree = () => {
   return (
-    <div className="relative flex flex-col items-start gap-10 p-8 h-full overflow-hidden">
-      {/* TODO */}
-      <div className="flex flex-row -ml-20">
-        {images.map((image, idx) => (
-          <motion.div
-            variants={imageVariants}
-            key={"images-first" + idx.toString()}
-            style={{
-              rotate: Math.random() * 20 - 10,
-            }}
-            whileHover="whileHover"
-            whileTap="whileTap"
-            className="bg-white dark:bg-neutral-800 mt-4 -mr-4 p-1 border border-neutral-100 dark:border-neutral-700 rounded-xl overflow-hidden shrink-0"
-          >
-            <img
-              src={image}
-              alt="bali images"
-              width="500"
-              height="500"
-              className="rounded-lg w-20 md:w-40 h-20 md:h-40 object-cover shrink-0"
-            />
-          </motion.div>
-        ))}
-      </div>
+    <div className="relative flex flex-col items-start gap-10 p-8 md:h-[32rem] overflow-hidden">
       <div className="flex flex-row">
-        {images.map((image, idx) => (
-          <motion.div
-            key={"images-second" + idx.toString()}
-            style={{
-              rotate: Math.random() * 20 - 10,
-            }}
-            variants={imageVariants}
-            whileHover="whileHover"
-            whileTap="whileTap"
-            className="bg-white dark:bg-neutral-800 mt-4 -mr-4 p-1 border border-neutral-100 dark:border-neutral-700 rounded-xl overflow-hidden shrink-0"
-          >
-            <img
-              src={image}
-              alt="bali images"
-              width="500"
-              height="500"
-              className="rounded-lg w-20 md:w-40 h-20 md:h-40 object-cover shrink-0"
-            />
-          </motion.div>
-        ))}
+        <img
+          src={"/assets/developer.png"}
+          alt="bali images"
+          width="500"
+          height="500"
+          className="rounded-lg size-full object-cover"
+        />
       </div>
 
       <div className="left-0 z-[100] absolute inset-y-0 bg-gradient-to-r from-white dark:from-black to-transparent w-20 h-full pointer-events-none" />

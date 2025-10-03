@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL("https://avatars.githubusercontent.com/**"),
       new URL("https://avatar.iran.liara.run/**"),
+      new URL("https://i.postimg.cc/**"),
     ],
   },
 };

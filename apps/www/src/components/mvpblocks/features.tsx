@@ -1,10 +1,10 @@
 import {
-  Building2,
-  Lightbulb,
-  ScreenShare,
-  Trophy,
-  User,
-  User2,
+  CloudIcon,
+  DatabaseIcon,
+  GlobeIcon,
+  HardDriveIcon,
+  ServerIcon,
+  ZapIcon,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -21,26 +21,26 @@ type FeatureItem = {
 // Create feature data arrays for left and right columns
 const leftFeatures: FeatureItem[] = [
   {
-    icon: Building2,
-    title: "Taught by Professionals",
+    icon: ServerIcon,
+    title: "One-Click Hosting",
     description:
-      "Learn directly from top engineers and founders with real-world experience.",
+      "Deploy your apps in seconds with GitHub/GitLab integration. No configs, no stress.",
     position: "left",
     cornerStyle: "sm:translate-x-4 sm:rounded-br-[2px]",
   },
   {
-    icon: User2,
-    title: "Coding Hostels",
+    icon: DatabaseIcon,
+    title: "Managed Databases",
     description:
-      "Join virtual hostels to study, collaborate, and vibe with fellow learners.",
+      "Postgres, MySQL, and more—fully managed with backups, scaling, and monitoring.",
     position: "left",
     cornerStyle: "sm:-translate-x-4 sm:rounded-br-[2px]",
   },
   {
-    icon: Trophy,
-    title: "Bounties",
+    icon: HardDriveIcon,
+    title: "Cloud Storage",
     description:
-      "Win rewards for solving challenges, contributing to projects, and helping peers.",
+      "Reliable object storage for your files, images, and static assets with S3 compatibility.",
     position: "left",
     cornerStyle: "sm:translate-x-4 sm:rounded-tr-[2px]",
   },
@@ -48,26 +48,26 @@ const leftFeatures: FeatureItem[] = [
 
 const rightFeatures: FeatureItem[] = [
   {
-    icon: ScreenShare,
-    title: "Revision Classes",
+    icon: GlobeIcon,
+    title: "Global Edge",
     description:
-      "Stay sharp with weekly revision sessions and topic refreshers.",
+      "Low latency edge deployment across multiple regions—your users always get the fastest response.",
     position: "right",
     cornerStyle: "sm:-translate-x-4 sm:rounded-bl-[2px]",
   },
   {
-    icon: User,
-    title: "Peer Code Reviews",
+    icon: CloudIcon,
+    title: "Multi-Cloud Freedom",
     description:
-      "Improve faster with feedback from mentors and batchmates on your actual code.",
+      "Deploy on AWS, GCP, Cloudflare, or Infyra.cloud with a single API. Zero vendor lock-in.",
     position: "right",
     cornerStyle: "sm:translate-x-4 sm:rounded-bl-[2px]",
   },
   {
-    icon: Lightbulb,
-    title: "Leet Lab",
+    icon: ZapIcon,
+    title: "Pay-as-You-Go",
     description:
-      "Ace coding interviews with daily DSA problems, contests, and tracking.",
+      "Only pay for what you use. Generous free tier for indie devs and startups.",
     position: "right",
     cornerStyle: "sm:-translate-x-4 sm:rounded-tl-[2px]",
   },
@@ -117,20 +117,21 @@ export default function CircularFeaturesSection() {
           </div>
 
           {/* Center column */}
+          {/* Center column */}
           <div className="self-center order-[1] sm:order-[0] mb-6 md:mb-0">
             <div className="relative bg-secondary mx-auto mb-4.5 px-4 py-2 ring-border rounded-full rounded-bl-[2px] ring w-fit text-foreground text-sm">
               <span className="z-1 relative flex items-center gap-2">
-                Features
+                Infyra.cloud
               </span>
               <span className="-bottom-px left-1/2 absolute bg-gradient-to-r from-primary/0 via-primary to-primary/0 w-2/5 h-px -translate-x-1/2" />
               <span className="absolute inset-0 bg-[radial-gradient(30%_40%_at_50%_100%,hsl(var(--primary)/0.25)_0%,transparent_100%)]" />
             </div>
             <h2 className="mb-2 sm:mb-2.5 text-foreground md:text-[2rem] text-2xl text-center">
-              Key Benefits of Cohorts
+              Deploy Anything, Anywhere
             </h2>
             <p className="mx-auto max-w-[18rem] text-muted-foreground text-center text-pretty">
-              Cohorts are best way to learn because you finish the course in a
-              timely manner
+              The India-first multi-cloud platform for hosting apps, databases,
+              and storage— with one-click deployments and zero vendor lock-in.
             </p>
           </div>
 

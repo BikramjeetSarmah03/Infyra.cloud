@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRightIcon } from "lucide-react";
+import Image from "next/image";
 
 export default function Globe3D() {
   return (
@@ -68,15 +69,17 @@ export default function Globe3D() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         >
           <div className="relative flex w-full h-40 md:h-64 overflow-hidden">
-            <img
-              src="https://i.postimg.cc/5NwYwdTn/earth.webp"
+            <Image
+              src="/assets/earth.webp"
               alt="Earth"
               className="top-0 left-1/2 -z-10 absolute opacity-80 mx-auto px-4 -translate-x-1/2"
+              width={1000}
+              height={100}
             />
           </div>
           <div className="z-10 relative shadow-[0_0_50px_rgba(155,135,245,0.2)] mx-auto rounded-lg max-w-5xl overflow-hidden">
-            <img
-              src="https://i.postimg.cc/FKKY5fRB/lunexa-db.webp"
+            <Image
+              src="/assets/dashboard.jpeg"
               alt="Lunexa Dashboard"
               width={1920}
               height={1080}
