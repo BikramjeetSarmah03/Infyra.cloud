@@ -2,6 +2,8 @@
 
 Organized by module (mirroring [product.md](./product.md)'s structure), each broken into phases. This is a planning artifact for sequencing — not a sprint board. Cross-references the per-module deep-dive docs in [modules/](./modules/) for the reasoning behind each item.
 
+**For build order across modules — what blocks what, and the UI at each stage — see [build-plan.md](./build-plan.md).** This doc organizes by module; that one organizes by sequence.
+
 **Phase definitions:**
 - **MVP** — the minimum that lets one agency run one real client through the product end to end.
 - **V1** — rounds out the module to match product.md's full spec.
