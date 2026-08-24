@@ -1,3 +1,3 @@
 {
-	"extends": "@infyra/config/tsconfig.base.json"
+  "extends": "@infyra/config/tsconfig.base.json"
 }

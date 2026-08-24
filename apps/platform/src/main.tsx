@@ -7,30 +7,30 @@ import { queryClient } from "./lib/query-client";
 import { routeTree } from "./routeTree.gen";
 
 const router = createRouter({
-	routeTree,
-	defaultPreload: "intent",
-	scrollRestoration: true,
-	defaultPendingComponent: () => <Loader />,
-	context: { queryClient },
+  routeTree,
+  defaultPreload: "intent",
+  scrollRestoration: true,
+  defaultPendingComponent: () => <Loader />,
+  context: { queryClient },
 });
 
 declare module "@tanstack/react-router" {
-	interface Register {
-		router: typeof router;
-	}
+  interface Register {
+    router: typeof router;
+  }
 }
 
 const rootElement = document.getElementById("app");
 
 if (!rootElement) {
-	throw new Error("Root element not found");
+  throw new Error("Root element not found");
 }
 
 if (!rootElement.innerHTML) {
-	const root = ReactDOM.createRoot(rootElement);
-	root.render(
-		<QueryClientProvider client={queryClient}>
-			<RouterProvider router={router} />
-		</QueryClientProvider>,
-	);
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>,
+  );
 }

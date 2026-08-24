@@ -1,6 +1,6 @@
 {
-	"extends": "@infyra/config/tsconfig.base.json",
-	"compilerOptions": {
-		"types": ["bun", "node"]
-	}
+  "extends": "@infyra/config/tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["bun", "node"]
+  }
 }
