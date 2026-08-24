@@ -1,4 +1,5 @@
 import { Toaster } from "@infyra/ui/components/sonner";
+import type { QueryClient } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	HeadContent,
@@ -10,7 +11,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 import "../index.css";
 
-export type RouterAppContext = Record<string, never>;
+export interface RouterAppContext {
+	queryClient: QueryClient;
+}
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
 	component: RootComponent,

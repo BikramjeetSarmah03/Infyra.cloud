@@ -2,12 +2,14 @@ import { Button } from "@infyra/ui/components/button";
 import { Input } from "@infyra/ui/components/input";
 import { Label } from "@infyra/ui/components/label";
 import { useForm } from "@tanstack/react-form";
+import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import z from "zod";
 
 import Loader from "@/components/loader";
 import { authClient } from "@/lib/auth-client";
+import { authSessionKey, useAuthSession } from "@/lib/auth-session";
 
 export const Route = createFileRoute("/auth/login")({
 	component: LoginPage,
@@ -15,7 +17,8 @@ export const Route = createFileRoute("/auth/login")({
 
 function LoginPage() {
 	const navigate = useNavigate({ from: "/auth/login" });
-	const { isPending } = authClient.useSession();
+	const queryClient = useQueryClient();
+	const { isPending } = useAuthSession();
 
 	const form = useForm({
 		defaultValues: {
@@ -29,7 +32,8 @@ function LoginPage() {
 					password: value.password,
 				},
 				{
-					onSuccess: () => {
+					onSuccess: ({ data }) => {
+						queryClient.setQueryData(authSessionKey, data);
 						navigate({ to: "/" });
 						toast.success("Sign in successful");
 					},

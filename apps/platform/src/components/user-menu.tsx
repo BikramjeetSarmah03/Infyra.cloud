@@ -9,13 +9,16 @@ import {
 	DropdownMenuTrigger,
 } from "@infyra/ui/components/dropdown-menu";
 import { Skeleton } from "@infyra/ui/components/skeleton";
+import { useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 
 import { authClient } from "@/lib/auth-client";
+import { authSessionKey, useAuthSession } from "@/lib/auth-session";
 
 export default function UserMenu() {
 	const navigate = useNavigate();
-	const { data: session, isPending } = authClient.useSession();
+	const queryClient = useQueryClient();
+	const { data: session, isPending } = useAuthSession();
 
 	if (isPending) {
 		return <Skeleton className="h-9 w-24" />;
@@ -45,8 +48,9 @@ export default function UserMenu() {
 							authClient.signOut({
 								fetchOptions: {
 									onSuccess: () => {
+										queryClient.setQueryData(authSessionKey, null);
 										navigate({
-											to: "/",
+											to: "/auth/login",
 										});
 									},
 								},
