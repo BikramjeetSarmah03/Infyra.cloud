@@ -1,4 +1,5 @@
 {
+  "root": false,
   "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
   "vcs": {
     "enabled": true,
@@ -7,7 +8,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.source"]
+    "includes": ["**", "!node_modules", "!.source", "!dist", "!.astro"]
   },
   "formatter": {
     "enabled": true,
@@ -28,6 +29,11 @@
       "source": {
         "organizeImports": "on"
       }
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
     }
   }
 }

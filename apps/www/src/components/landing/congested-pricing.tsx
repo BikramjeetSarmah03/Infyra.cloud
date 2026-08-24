@@ -1,13 +1,13 @@
+import NumberFlow from "@number-flow/react";
+import confetti from "canvas-confetti";
+import { motion } from "framer-motion";
+import { Check, Star } from "lucide-react";
+import { useRef, useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { Check, Star } from "lucide-react";
-import { useState, useRef } from "react";
-import confetti from "canvas-confetti";
-import NumberFlow from "@number-flow/react";
 
 const plans: PricingPlan[] = [
   {
@@ -123,31 +123,30 @@ export default function CongestedPricing() {
           Simple, transparent pricing for all.
         </h2>
         <p className="text-muted-foreground text-lg whitespace-pre-line">
-          Choose the plan that works for you{"\n"}All plans include access to our
-          platform, lead generation tools, and dedicated support.
+          Choose the plan that works for you{"\n"}All plans include access to
+          our platform, lead generation tools, and dedicated support.
         </p>
       </div>
 
       <div className="flex justify-center mb-10">
-        <label className="inline-flex relative items-center cursor-pointer">
-          <Label>
-            <Switch
-              ref={switchRef}
-              checked={!isMonthly}
-              onCheckedChange={handleToggle}
-              className="relative"
-            />
-          </Label>
-        </label>
-        <span className="ml-2 font-semibold">
+        <div className="inline-flex relative items-center">
+          <Switch
+            id="billing-period"
+            ref={switchRef}
+            checked={!isMonthly}
+            onCheckedChange={handleToggle}
+            className="relative"
+          />
+        </div>
+        <Label htmlFor="billing-period" className="ml-2 font-semibold">
           Annual billing <span className="text-primary">(Save 20%)</span>
-        </span>
+        </Label>
       </div>
 
       <div className="gap-4 grid grid-cols-1 md:grid-cols-3 sm:2">
         {plans.map((plan, index) => {
-          const isCustom = isNaN(
-            Number(isMonthly ? plan.price : plan.yearlyPrice)
+          const isCustom = Number.isNaN(
+            Number(isMonthly ? plan.price : plan.yearlyPrice),
           );
 
           return (
@@ -182,7 +181,7 @@ export default function CongestedPricing() {
                   ? "z-0 translate-x-0 translate-y-0 -translate-z-[50px] rotate-y-[10deg] transform"
                   : "z-10",
                 index === 0 && "origin-right",
-                index === 2 && "origin-left"
+                index === 2 && "origin-left",
               )}
             >
               {plan.isPopular && (
@@ -263,7 +262,7 @@ export default function CongestedPricing() {
                     "hover:bg-primary hover:text-primary-foreground hover:ring-primary transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-offset-1",
                     plan.isPopular
                       ? "bg-primary text-primary-foreground"
-                      : "bg-background text-foreground"
+                      : "bg-background text-foreground",
                   )}
                 >
                   {plan.buttonText}

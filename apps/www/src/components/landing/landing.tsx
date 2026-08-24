@@ -1,7 +1,7 @@
-import FeaturesSectionDemo from "./features-section-demo-3";
 import Globe3D from "./3dglobe";
 import CongestedPricing from "./congested-pricing";
 import CircularFeaturesSection from "./features";
+import FeaturesSectionDemo from "./features-section-demo-3";
 import Footer4Col from "./footer-4col";
 
 export default function LandingPage() {

@@ -3,9 +3,9 @@ import {
   DatabaseIcon,
   GlobeIcon,
   HardDriveIcon,
+  type LucideIcon,
   ServerIcon,
   ZapIcon,
-  type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -80,7 +80,7 @@ const FeatureCard = ({ feature }: { feature: FeatureItem }) => {
         className={cn(
           "relative px-4 pt-4 pb-4 rounded-2xl text-sm",
           "bg-secondary/50 ring-border ring",
-          feature.cornerStyle
+          feature.cornerStyle,
         )}
       >
         <div className="mb-3 text-[2rem] text-primary">
