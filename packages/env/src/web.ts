@@ -4,13 +4,8 @@ const schema = z.object({
 	VITE_SERVER_URL: z.url(),
 });
 
-function readRuntimeEnv() {
-	const raw: Record<string, string | undefined> = {};
-	for (const key of Object.keys(schema.shape)) {
-		const value = import.meta.env[key];
-		raw[key] = value === "" ? undefined : value;
-	}
-	return raw;
-}
+const rawViteServerUrl = import.meta.env.VITE_SERVER_URL;
 
-export const env = schema.parse(readRuntimeEnv());
+export const env = schema.parse({
+	VITE_SERVER_URL: rawViteServerUrl === "" ? undefined : rawViteServerUrl,
+});
