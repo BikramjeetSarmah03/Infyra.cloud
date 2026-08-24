@@ -10,6 +10,11 @@ export default defineConfig({
 	out: "./src/migrations",
 	dialect: "postgresql",
 	dbCredentials: {
-		url: process.env.DATABASE_URL || "",
+		// drizzle-kit's CLI (push/generate/migrate) connects over plain
+		// Postgres wire protocol, which hangs/fails against Neon's pooled
+		// endpoint. The app itself keeps using the pooled DATABASE_URL via
+		// @neondatabase/serverless (packages/db/src/index.ts) — only CLI
+		// tooling needs the direct, unpooled connection.
+		url: process.env.DATABASE_URL_DIRECT || "",
 	},
 });
