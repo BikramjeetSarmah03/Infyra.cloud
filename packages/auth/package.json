@@ -1,0 +1,24 @@
+{
+  "name": "@infyra/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@infyra/db": "workspace:*",
+    "@infyra/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@infyra/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}

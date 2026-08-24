@@ -1,0 +1,18 @@
+---
+import Layout from "@/components/layout.astro";
+import LandingPage from "@/components/landing/landing";
+import "@/styles/global.css";
+---
+
+<Layout>
+  <head>
+    <title>Infyra.cloud | Multi-Cloud Freedom for Developers</title>
+    <meta
+      name="description"
+      content="Deploy faster with multi-cloud freedom. One dashboard for AWS, GCP, Azure, Cloudflare — India-first pricing and developer-first simplicity."
+    />
+  </head>
+  <main class="w-full min-h-screen bg-[#080202]">
+    <LandingPage client:load />
+  </main>
+</Layout>
