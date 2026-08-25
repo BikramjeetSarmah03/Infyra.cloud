@@ -1,26 +1,12 @@
-import { auth } from "@infyra/auth";
-import { env } from "@infyra/env/server";
-import { Hono } from "hono";
-import { cors } from "hono/cors";
-import { logger } from "hono/logger";
+import { createApp, mountDocs } from "@/core";
+import { platformModule } from "@/modules/platform/platform.module";
 
-const app = new Hono();
+const app = createApp();
 
-app.use(logger());
-app.use(
-  "/*",
-  cors({
-    origin: env.CORS_ORIGIN,
-    allowMethods: ["GET", "POST", "OPTIONS"],
-    allowHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  }),
-);
+app.route("/api/platform", platformModule());
 
-app.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
+app.get("/", (c) => c.text("OK"));
 
-app.get("/", (c) => {
-  return c.text("OK");
-});
+mountDocs(app);
 
 export default app;

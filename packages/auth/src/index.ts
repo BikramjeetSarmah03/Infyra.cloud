@@ -3,6 +3,7 @@ import * as schema from "@infyra/db/schema/auth";
 import { env } from "@infyra/env/server";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { openAPI } from "better-auth/plugins";
 
 export function createAuth() {
   const db = createDb();
@@ -26,7 +27,9 @@ export function createAuth() {
         httpOnly: true,
       },
     },
-    plugins: [],
+    // Exposes generateOpenAPISchema(); the built-in Scalar page is disabled
+    // because the server serves this spec under its own /api/docs routes.
+    plugins: [openAPI({ disableDefaultReference: true })],
   });
 }
 
