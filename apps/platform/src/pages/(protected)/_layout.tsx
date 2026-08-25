@@ -10,6 +10,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { NotFound } from "@/components/common/not-found";
 import { ModeToggle } from "@/components/mode-toggle";
 import { authSessionQueryOptions } from "@/lib/auth-session";
+import { activeOrganizationQueryOptions } from "@/lib/use-active-organization";
 
 export const Route = createFileRoute("/(protected)")({
   component: ProtectedLayout,
@@ -21,7 +22,18 @@ export const Route = createFileRoute("/(protected)")({
     if (!session) {
       throw redirect({ to: "/auth/login" });
     }
-    return { session };
+
+    // Users predating the organization plugin (and anyone who abandoned
+    // onboarding) have no workspace yet. Every tenant-scoped request would
+    // fail, so gate the whole protected area rather than each page.
+    const organization = await context.queryClient.ensureQueryData(
+      activeOrganizationQueryOptions,
+    );
+    if (!organization) {
+      throw redirect({ to: "/onboarding" });
+    }
+
+    return { session, organization };
   },
 });
 

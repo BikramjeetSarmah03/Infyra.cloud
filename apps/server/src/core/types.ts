@@ -22,3 +22,13 @@ export type AuthedEnv = {
     session: NonNullable<AppVariables["session"]>;
   };
 };
+
+/**
+ * Adds the resolved tenant on top of `AuthedEnv`. Handlers under `requireOrg`
+ * read `organizationId` directly instead of re-deriving it from the session.
+ */
+export type OrgEnv = {
+  Variables: AuthedEnv["Variables"] & {
+    organizationId: string;
+  };
+};

@@ -12,10 +12,10 @@ import type * as React from "react";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
-import { TeamSwitcher } from "@/components/team-switcher";
+import { OrgHeader } from "@/components/org-header";
 import { authClient } from "@/lib/auth-client";
 import { authSessionKey, useAuthSession } from "@/lib/auth-session";
-import { navGroups, navSecondary, navTop, workspaces } from "@/lib/nav-data";
+import { navGroups, navSecondary, navTop } from "@/lib/nav-data";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session } = useAuthSession();
@@ -25,7 +25,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={workspaces} />
+        <OrgHeader />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navTop} />

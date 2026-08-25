@@ -11,10 +11,13 @@
 import { Route as rootRouteImport } from './pages/__root'
 import { Route as protectedLayoutRouteImport } from './pages/(protected)/_layout'
 import { Route as AuthLayoutRouteImport } from './pages/auth/_layout'
+import { Route as OnboardingRouteImport } from './pages/onboarding'
 import { Route as protectedIndexRouteImport } from './pages/(protected)/index'
 import { Route as AuthLoginRouteImport } from './pages/auth/login'
 import { Route as AuthRegisterRouteImport } from './pages/auth/register'
 import { Route as protectedConnectorsIndexRouteImport } from './pages/(protected)/connectors/index'
+import { Route as protectedDatabasesIndexRouteImport } from './pages/(protected)/databases/index'
+import { Route as protectedDeploymentsIndexRouteImport } from './pages/(protected)/deployments/index'
 import { Route as protectedProjectsIndexRouteImport } from './pages/(protected)/projects/index'
 import { Route as protectedProjectsProjectSlugRouteImport } from './pages/(protected)/projects/$projectSlug'
 
@@ -25,6 +28,11 @@ const protectedLayoutRoute = protectedLayoutRouteImport.update({
 const AuthLayoutRoute = AuthLayoutRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
 const protectedIndexRoute = protectedIndexRouteImport.update({
@@ -48,6 +56,17 @@ const protectedConnectorsIndexRoute =
     path: '/connectors/',
     getParentRoute: () => protectedLayoutRoute,
   } as any)
+const protectedDatabasesIndexRoute = protectedDatabasesIndexRouteImport.update({
+  id: '/databases/',
+  path: '/databases/',
+  getParentRoute: () => protectedLayoutRoute,
+} as any)
+const protectedDeploymentsIndexRoute =
+  protectedDeploymentsIndexRouteImport.update({
+    id: '/deployments/',
+    path: '/deployments/',
+    getParentRoute: () => protectedLayoutRoute,
+  } as any)
 const protectedProjectsIndexRoute = protectedProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -62,67 +81,86 @@ const protectedProjectsProjectSlugRoute =
 
 export interface FileRoutesByFullPath {
   '/auth': typeof AuthLayoutRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/': typeof protectedIndexRoute
   '/projects/$projectSlug': typeof protectedProjectsProjectSlugRoute
   '/connectors/': typeof protectedConnectorsIndexRoute
+  '/databases/': typeof protectedDatabasesIndexRoute
+  '/deployments/': typeof protectedDeploymentsIndexRoute
   '/projects/': typeof protectedProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthLayoutRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/': typeof protectedIndexRoute
   '/projects/$projectSlug': typeof protectedProjectsProjectSlugRoute
   '/connectors': typeof protectedConnectorsIndexRoute
+  '/databases': typeof protectedDatabasesIndexRoute
+  '/deployments': typeof protectedDeploymentsIndexRoute
   '/projects': typeof protectedProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(protected)': typeof protectedLayoutRouteWithChildren
   '/auth': typeof AuthLayoutRouteWithChildren
+  '/onboarding': typeof OnboardingRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/(protected)/': typeof protectedIndexRoute
   '/(protected)/projects/$projectSlug': typeof protectedProjectsProjectSlugRoute
   '/(protected)/connectors/': typeof protectedConnectorsIndexRoute
+  '/(protected)/databases/': typeof protectedDatabasesIndexRoute
+  '/(protected)/deployments/': typeof protectedDeploymentsIndexRoute
   '/(protected)/projects/': typeof protectedProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/auth'
+    | '/onboarding'
     | '/auth/login'
     | '/auth/register'
     | '/'
     | '/projects/$projectSlug'
     | '/connectors/'
+    | '/databases/'
+    | '/deployments/'
     | '/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
+    | '/onboarding'
     | '/auth/login'
     | '/auth/register'
     | '/'
     | '/projects/$projectSlug'
     | '/connectors'
+    | '/databases'
+    | '/deployments'
     | '/projects'
   id:
     | '__root__'
     | '/(protected)'
     | '/auth'
+    | '/onboarding'
     | '/auth/login'
     | '/auth/register'
     | '/(protected)/'
     | '/(protected)/projects/$projectSlug'
     | '/(protected)/connectors/'
+    | '/(protected)/databases/'
+    | '/(protected)/deployments/'
     | '/(protected)/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   protectedLayoutRoute: typeof protectedLayoutRouteWithChildren
   AuthLayoutRoute: typeof AuthLayoutRouteWithChildren
+  OnboardingRoute: typeof OnboardingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -139,6 +177,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(protected)/': {
@@ -169,6 +214,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedConnectorsIndexRouteImport
       parentRoute: typeof protectedLayoutRoute
     }
+    '/(protected)/databases/': {
+      id: '/(protected)/databases/'
+      path: '/databases'
+      fullPath: '/databases/'
+      preLoaderRoute: typeof protectedDatabasesIndexRouteImport
+      parentRoute: typeof protectedLayoutRoute
+    }
+    '/(protected)/deployments/': {
+      id: '/(protected)/deployments/'
+      path: '/deployments'
+      fullPath: '/deployments/'
+      preLoaderRoute: typeof protectedDeploymentsIndexRouteImport
+      parentRoute: typeof protectedLayoutRoute
+    }
     '/(protected)/projects/': {
       id: '/(protected)/projects/'
       path: '/projects'
@@ -190,6 +249,8 @@ interface protectedLayoutRouteChildren {
   protectedIndexRoute: typeof protectedIndexRoute
   protectedProjectsProjectSlugRoute: typeof protectedProjectsProjectSlugRoute
   protectedConnectorsIndexRoute: typeof protectedConnectorsIndexRoute
+  protectedDatabasesIndexRoute: typeof protectedDatabasesIndexRoute
+  protectedDeploymentsIndexRoute: typeof protectedDeploymentsIndexRoute
   protectedProjectsIndexRoute: typeof protectedProjectsIndexRoute
 }
 
@@ -197,6 +258,8 @@ const protectedLayoutRouteChildren: protectedLayoutRouteChildren = {
   protectedIndexRoute: protectedIndexRoute,
   protectedProjectsProjectSlugRoute: protectedProjectsProjectSlugRoute,
   protectedConnectorsIndexRoute: protectedConnectorsIndexRoute,
+  protectedDatabasesIndexRoute: protectedDatabasesIndexRoute,
+  protectedDeploymentsIndexRoute: protectedDeploymentsIndexRoute,
   protectedProjectsIndexRoute: protectedProjectsIndexRoute,
 }
 
@@ -221,6 +284,7 @@ const AuthLayoutRouteWithChildren = AuthLayoutRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   protectedLayoutRoute: protectedLayoutRouteWithChildren,
   AuthLayoutRoute: AuthLayoutRouteWithChildren,
+  OnboardingRoute: OnboardingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

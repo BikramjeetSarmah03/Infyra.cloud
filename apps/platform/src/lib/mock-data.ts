@@ -163,6 +163,26 @@ export type Resource = {
   providerId: ProviderId;
   status: ResourceStatus;
   region: string;
+  /**
+   * Database-only detail. Lives here rather than on a separate type because
+   * data-model.md §5 keeps one `resources` table with a provider-specific
+   * `metadata` blob — this mirrors that shape.
+   */
+  database?: {
+    engine: string;
+    version: string;
+    plan: string;
+    sizeGb: number;
+    /** Neon-style branching; providers without it report null. */
+    branches: number | null;
+    /**
+     * Whether infyra injected this DB's connection string into a deploy
+     * target's env vars (product.md §6). Drives the "auto" marker.
+     */
+    injectedInto: string | null;
+    /** Neon scales computes to zero on idle — normal, not degraded. */
+    computeSuspended: boolean;
+  };
 };
 
 export type Deploy = {
@@ -215,6 +235,15 @@ export const projects: Project[] = [
         providerId: "neon",
         status: "active",
         region: "aws-us-east-2",
+        database: {
+          engine: "Postgres",
+          version: "17",
+          plan: "Scale",
+          sizeGb: 4.2,
+          branches: 3,
+          injectedInto: "northwind-web",
+          computeSuspended: false,
+        },
       },
     ],
     deploys: [
@@ -307,6 +336,33 @@ export const projects: Project[] = [
         providerId: "supabase",
         status: "active",
         region: "eu-central-1",
+        database: {
+          engine: "Postgres",
+          version: "16",
+          plan: "Pro",
+          sizeGb: 12.8,
+          branches: null,
+          injectedInto: "fabrikam-api",
+          computeSuspended: false,
+        },
+      },
+      {
+        id: "res_fb_db_analytics",
+        name: "fabrikam-analytics",
+        type: "database",
+        providerId: "neon",
+        status: "active",
+        region: "aws-eu-central-1",
+        database: {
+          engine: "Postgres",
+          version: "17",
+          plan: "Free",
+          sizeGb: 0.3,
+          branches: 1,
+          injectedInto: null,
+          // Scale-to-zero on an idle free-tier DB is expected behaviour.
+          computeSuspended: true,
+        },
       },
     ],
     deploys: [
@@ -340,10 +396,83 @@ export const projects: Project[] = [
         status: "provisioning",
         region: "global",
       },
+      {
+        id: "res_ts_db",
+        name: "tailspin-db",
+        type: "database",
+        providerId: "supabase",
+        status: "provisioning",
+        region: "us-east-1",
+        database: {
+          engine: "Postgres",
+          version: "16",
+          plan: "Free",
+          sizeGb: 0,
+          branches: null,
+          // Injection waits for ACTIVE_HEALTHY — providers/supabase.md §6.5.
+          injectedInto: null,
+          computeSuspended: false,
+        },
+      },
     ],
-    deploys: [],
+    deploys: [
+      {
+        id: "dep_6",
+        status: "building",
+        commit: "1f4b7d0",
+        branch: "main",
+        message: "chore: initial deploy",
+        triggeredBy: "Bikram",
+        duration: "—",
+        createdAt: "just now",
+      },
+    ],
   },
 ];
+
+/**
+ * Cross-project views.
+ *
+ * A per-project tab answers "how is this client doing"; these answer "how is my
+ * agency doing" (build-plan.md §4). Both flatten the nested project data and
+ * keep a back-reference, which is the shape a real `GET /resources` /
+ * `GET /deploys` workspace-scoped endpoint would return.
+ */
+export type ProjectRef = {
+  projectId: string;
+  projectName: string;
+  projectSlug: string;
+  client: string;
+};
+
+export type DatabaseRow = Resource & { project: ProjectRef };
+
+export type DeployRow = Deploy & { project: ProjectRef; target: string };
+
+function projectRef(project: Project): ProjectRef {
+  return {
+    projectId: project.id,
+    projectName: project.name,
+    projectSlug: project.slug,
+    client: project.client,
+  };
+}
+
+export const databases: DatabaseRow[] = projects.flatMap((project) =>
+  project.resources
+    .filter((resource) => resource.type === "database")
+    .map((resource) => ({ ...resource, project: projectRef(project) })),
+);
+
+export const deploys: DeployRow[] = projects.flatMap((project) =>
+  project.deploys.map((deploy) => ({
+    ...deploy,
+    project: projectRef(project),
+    target:
+      project.resources.find((resource) => resource.type !== "database")
+        ?.name ?? "—",
+  })),
+);
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);

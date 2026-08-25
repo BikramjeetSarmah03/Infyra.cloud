@@ -9,15 +9,7 @@ import {
   Settings2Icon,
   UsersIcon,
 } from "lucide-react";
-import { connections, projects } from "@/lib/mock-data";
-
-export const workspaces = [
-  {
-    name: "My Agency",
-    logo: <BoxIcon />,
-    plan: "Free",
-  },
-];
+import { connections, databases, deploys, projects } from "@/lib/mock-data";
 
 export interface NavSubItem {
   title: string;
@@ -78,11 +70,13 @@ export const navGroups: NavGroup[] = [
         title: "Databases",
         url: "/databases",
         icon: <DatabaseIcon />,
+        badge: databases.length,
       },
       {
         title: "Deployments",
         url: "/deployments",
         icon: <RocketIcon />,
+        badge: deploys.length,
       },
     ],
   },
