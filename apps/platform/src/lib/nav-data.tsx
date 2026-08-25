@@ -9,6 +9,7 @@ import {
   Settings2Icon,
   UsersIcon,
 } from "lucide-react";
+import { connections, projects } from "@/lib/mock-data";
 
 export const workspaces = [
   {
@@ -57,20 +58,21 @@ export const navGroups: NavGroup[] = [
         title: "Projects",
         url: "/projects",
         icon: <BoxIcon />,
-        badge: 12,
-        items: [
-          { title: "Northwind Site", url: "/projects/northwind-site" },
-          { title: "Contoso Landing", url: "/projects/contoso-landing" },
-          { title: "Fabrikam API", url: "/projects/fabrikam-api" },
-        ],
+        badge: projects.length,
+        // Recent projects pinned as children — agencies work on a few active
+        // clients at a time, so deep-linking them saves the list→detail hop.
+        items: projects.slice(0, 3).map((project) => ({
+          title: project.name,
+          url: `/projects/${project.slug}`,
+        })),
         viewAllUrl: "/projects",
         viewAllLabel: "All projects",
       },
       {
-        title: "Connections",
-        url: "/connections",
+        title: "Connectors",
+        url: "/connectors",
         icon: <PlugZapIcon />,
-        badge: 5,
+        badge: connections.length,
       },
       {
         title: "Databases",

@@ -14,6 +14,9 @@ import { Route as AuthLayoutRouteImport } from './pages/auth/_layout'
 import { Route as protectedIndexRouteImport } from './pages/(protected)/index'
 import { Route as AuthLoginRouteImport } from './pages/auth/login'
 import { Route as AuthRegisterRouteImport } from './pages/auth/register'
+import { Route as protectedConnectorsIndexRouteImport } from './pages/(protected)/connectors/index'
+import { Route as protectedProjectsIndexRouteImport } from './pages/(protected)/projects/index'
+import { Route as protectedProjectsProjectSlugRouteImport } from './pages/(protected)/projects/$projectSlug'
 
 const protectedLayoutRoute = protectedLayoutRouteImport.update({
   id: '/(protected)',
@@ -39,18 +42,41 @@ const AuthRegisterRoute = AuthRegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => AuthLayoutRoute,
 } as any)
+const protectedConnectorsIndexRoute =
+  protectedConnectorsIndexRouteImport.update({
+    id: '/connectors/',
+    path: '/connectors/',
+    getParentRoute: () => protectedLayoutRoute,
+  } as any)
+const protectedProjectsIndexRoute = protectedProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => protectedLayoutRoute,
+} as any)
+const protectedProjectsProjectSlugRoute =
+  protectedProjectsProjectSlugRouteImport.update({
+    id: '/projects/$projectSlug',
+    path: '/projects/$projectSlug',
+    getParentRoute: () => protectedLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/auth': typeof AuthLayoutRouteWithChildren
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/': typeof protectedIndexRoute
+  '/projects/$projectSlug': typeof protectedProjectsProjectSlugRoute
+  '/connectors/': typeof protectedConnectorsIndexRoute
+  '/projects/': typeof protectedProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthLayoutRouteWithChildren
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/': typeof protectedIndexRoute
+  '/projects/$projectSlug': typeof protectedProjectsProjectSlugRoute
+  '/connectors': typeof protectedConnectorsIndexRoute
+  '/projects': typeof protectedProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -59,12 +85,29 @@ export interface FileRoutesById {
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/(protected)/': typeof protectedIndexRoute
+  '/(protected)/projects/$projectSlug': typeof protectedProjectsProjectSlugRoute
+  '/(protected)/connectors/': typeof protectedConnectorsIndexRoute
+  '/(protected)/projects/': typeof protectedProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/auth' | '/auth/login' | '/auth/register' | '/'
+  fullPaths:
+    | '/auth'
+    | '/auth/login'
+    | '/auth/register'
+    | '/'
+    | '/projects/$projectSlug'
+    | '/connectors/'
+    | '/projects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth' | '/auth/login' | '/auth/register' | '/'
+  to:
+    | '/auth'
+    | '/auth/login'
+    | '/auth/register'
+    | '/'
+    | '/projects/$projectSlug'
+    | '/connectors'
+    | '/projects'
   id:
     | '__root__'
     | '/(protected)'
@@ -72,6 +115,9 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/(protected)/'
+    | '/(protected)/projects/$projectSlug'
+    | '/(protected)/connectors/'
+    | '/(protected)/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,15 +162,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterRouteImport
       parentRoute: typeof AuthLayoutRoute
     }
+    '/(protected)/connectors/': {
+      id: '/(protected)/connectors/'
+      path: '/connectors'
+      fullPath: '/connectors/'
+      preLoaderRoute: typeof protectedConnectorsIndexRouteImport
+      parentRoute: typeof protectedLayoutRoute
+    }
+    '/(protected)/projects/': {
+      id: '/(protected)/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof protectedProjectsIndexRouteImport
+      parentRoute: typeof protectedLayoutRoute
+    }
+    '/(protected)/projects/$projectSlug': {
+      id: '/(protected)/projects/$projectSlug'
+      path: '/projects/$projectSlug'
+      fullPath: '/projects/$projectSlug'
+      preLoaderRoute: typeof protectedProjectsProjectSlugRouteImport
+      parentRoute: typeof protectedLayoutRoute
+    }
   }
 }
 
 interface protectedLayoutRouteChildren {
   protectedIndexRoute: typeof protectedIndexRoute
+  protectedProjectsProjectSlugRoute: typeof protectedProjectsProjectSlugRoute
+  protectedConnectorsIndexRoute: typeof protectedConnectorsIndexRoute
+  protectedProjectsIndexRoute: typeof protectedProjectsIndexRoute
 }
 
 const protectedLayoutRouteChildren: protectedLayoutRouteChildren = {
   protectedIndexRoute: protectedIndexRoute,
+  protectedProjectsProjectSlugRoute: protectedProjectsProjectSlugRoute,
+  protectedConnectorsIndexRoute: protectedConnectorsIndexRoute,
+  protectedProjectsIndexRoute: protectedProjectsIndexRoute,
 }
 
 const protectedLayoutRouteWithChildren = protectedLayoutRoute._addFileChildren(
